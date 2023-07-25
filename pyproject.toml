@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "oz-insta-back"
+version = "0.1.0"
+description = ""
+authors = ["None"]
+readme = "README.md"
+packages = [{include = "oz_insta_back"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
