@@ -1,11 +1,16 @@
 from django.db import models
-from common.models import Common
+from common.models import Commonmodel
 
 
-class Feed(Common):
+class Feed(Commonmodel):
 
     """Feed model definition"""
 
     caption = models.CharField(max_length=200)
     contentImg = models.URLField()
     likesNum = models.PositiveIntegerField(default=0)
+    feedAuthor = models.ForeignKey(
+        "users.User",
+        on_delete=models.CASCADE,
+        related_name="feeds",
+    )

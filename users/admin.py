@@ -7,28 +7,11 @@ from django.contrib.auth.admin import UserAdmin
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        (
-            ("Personal info"),
-            {
-                "fields": (
-                    "profileImg",
-                    "profileIntroduce",
-                    "followerNum",
-                    "followingNum",
-                )
-            },
-        ),
-        (
-            ("Permissions"),
-            {
-                "fields": (
-                    "is_active",
-                    "is_staff",
-                    "is_superuser",
-                    "groups",
-                    "user_permissions",
-                ),
-            },
-        ),
+        (("Personal info"), {"fields": ("first_name", "last_name", "email")}),
         (("Important dates"), {"fields": ("last_login", "date_joined")}),
+    )
+
+    list_display = (
+        "username",
+        "profileIntroduce",
     )

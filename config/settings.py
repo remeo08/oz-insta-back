@@ -34,6 +34,7 @@ CUSTOM_APPS = [
     "feeds.apps.FeedsConfig",
     "reviews.apps.ReviewsConfig",
     "common.apps.CommonConfig",
+    "rest_framework",
 ]
 SYSTEM_APPS = [
     "django.contrib.admin",

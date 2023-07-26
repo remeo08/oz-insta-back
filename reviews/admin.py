@@ -4,7 +4,4 @@ from .models import Review
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = (
-        "rcaption",
-        "reviewAuthor",
-    )
+    list_display = ("rcaption",)
