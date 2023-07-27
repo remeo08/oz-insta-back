@@ -10,6 +10,7 @@ packages = [{include = "oz_insta_back"}]
 python = "^3.11"
 django = "^4.2.3"
 djangorestframework = "^3.14.0"
+django-cors-headers = "^4.2.0"
 
 
 [build-system]

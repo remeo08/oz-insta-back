@@ -9,8 +9,7 @@ class Feed(Commonmodel):
     caption = models.CharField(max_length=200)
     contentImg = models.URLField()
     likesNum = models.PositiveIntegerField(default=0)
-    feedAuthor = models.ForeignKey(
+    user = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
-        related_name="feeds",
     )
