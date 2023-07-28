@@ -1,7 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 from .models import Feed
 from .serializers import FeedSerializer
+from users.models import User
 
 
 class AllFeeds(APIView):
@@ -21,7 +23,12 @@ class AllFeeds(APIView):
 
 class UserNameFeeds(APIView):
     def get(self, request, username):
-        print("username", username)
+        user = User.objects.get(username=username)
 
-    def delete(self, request, username):
-        pass
+        try:
+            feeds = Feed.objects.filter(user=user)
+        except Feed.DoesNotExist:
+            raise NotFound
+
+        serializer = FeedSerializer(feeds, many=True)
+        return Response(serializer.data)
