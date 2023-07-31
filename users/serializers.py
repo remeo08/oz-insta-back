@@ -16,3 +16,18 @@ class UserSerializer(ModelSerializer):
             "profileImg",
             "profileIntroduce",
         )
+
+
+class MyInfoSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
+
+class ReviewUserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "username",
+        )

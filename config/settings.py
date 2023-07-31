@@ -36,6 +36,7 @@ CUSTOM_APPS = [
     "common.apps.CommonConfig",
     "rest_framework",
     "corsheaders",
+    "rest_framework.authtoken",
 ]
 SYSTEM_APPS = [
     "django.contrib.admin",
@@ -62,6 +63,14 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",  # 세션 기반 유저 인증
+        "rest_framework.authentication.TokenAuthentication",  # 토큰 기반 유저 인증 -> 토큰을 서버 DB에 저장
+        "config.authentication.JWTAuthentication",  # JWT 토큰 기반 유저 인증 -> 토큰을 서버에 저장할 필요 X
+    ]
+}
 
 ROOT_URLCONF = "config.urls"
 
