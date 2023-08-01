@@ -7,7 +7,12 @@ from users.models import User
 
 class JWTAuthentication(BaseAuthentication):
     def authenticate(self, request):
-        jwt_token = request.headers.get("jwt_token")
+        jwt_token = request.headers.get("jwt-token")
+
+        # jwt_token이 없으면 패스
+        if not jwt_token:
+            print("jwt_token None")
+            return None
 
         decoded = jwt.decode(
             jwt_token,

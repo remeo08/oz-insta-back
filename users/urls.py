@@ -2,6 +2,11 @@ from django.urls import path
 from .views import UserInfo, Login, Logout, MyInfo, LoginJWT
 from rest_framework.authtoken.views import obtain_auth_token
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 # url : http://127.0.0.1:8000/api/v1/users/login
 # url : http://127.0.0.1:8000/api/v1/users/getToken
@@ -12,6 +17,9 @@ urlpatterns = [
     path("logout", Logout.as_view()),  # django session 로그아웃 처리
     path("getToken", obtain_auth_token),
     path("loginJWT", LoginJWT.as_view()),
+    path("login/simpleJWT", TokenObtainPairView.as_view()),
+    path("login/simpleJWT/refresh", TokenRefreshView.as_view()),
+    path("login/simpleJWT/verify", TokenVerifyView.as_view()),
 ]
 
 # API test program

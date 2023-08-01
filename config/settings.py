@@ -37,6 +37,7 @@ CUSTOM_APPS = [
     "rest_framework",
     "corsheaders",
     "rest_framework.authtoken",
+    "rest_framework_simplejwt",
 ]
 SYSTEM_APPS = [
     "django.contrib.admin",
@@ -66,9 +67,15 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",  # 세션 기반 유저 인증
-        "rest_framework.authentication.TokenAuthentication",  # 토큰 기반 유저 인증 -> 토큰을 서버 DB에 저장
-        "config.authentication.JWTAuthentication",  # JWT 토큰 기반 유저 인증 -> 토큰을 서버에 저장할 필요 X
+        # 세션 기반 유저 인증
+        "rest_framework.authentication.SessionAuthentication",
+        # 토큰 기반 유저 인증 -> 토큰을 서버 DB에 저장
+        # "rest_framework.authentication.TokenAuthentication",
+        # JWT 토큰 기반 유저 인증 -> 토큰을 서버에 저장할 필요 X
+        "config.authentication.JWTAuthentication",
+        # simple JWT 토큰 기반 유저 인증
+        # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html 사이트 참고
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
     ]
 }
 
@@ -146,5 +153,22 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:3000", "http://localhost:3000,"]
-CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"]
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+]
+
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # 시간이 짧음
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
